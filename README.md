@@ -3,7 +3,7 @@
 ## Installation
 
 - Build the DenuvoDemo project
-- Copy the .jar file from target into denuvo_demo_compose
+- Copy the .jar file from target into denuvo_demo_compose/DenuvoDemoApp
 - run
 ```bash
 sudo docker compose up
