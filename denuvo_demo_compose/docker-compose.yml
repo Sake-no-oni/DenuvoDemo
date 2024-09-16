@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  denuvo-demo-app:
+    container_name: denuvo_demo_app
+    build: ./DenuvoDemoApp
+    volumes:
+      - ./denuvo_demo_data:/app/denuvo_demo_data
+    ports:
+      - "8888:8888"
+    networks:
+      - denuvo_demo_net
+  db:
+    container_name: denuvo_demo_db_container
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: denuvo_demo_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./db/data:/var/lib/postgresql/data/
+    networks:
+      - denuvo_demo_net
+
+networks:
+  denuvo_demo_net:

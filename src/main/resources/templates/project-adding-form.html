@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Project Adding Form</title>
+</head>
+<body>
+    <h1 th:text="${'Add Project'}"></h1>
+    <form th:action="@{/client/addproject}" th:object="${project}" method="post">
+        <label for="name">Name:</label>
+        <input type="text" th:field="*{name}" id="name"><br>
+
+        <label for="description">Description:</label>
+        <input type="text" th:field="*{description}" id="description"><br>
+        
+        <label for="relatedCustomer.name">Customer:</label>
+        <input type="text" th:field="*{relatedCustomer.name}" id="relatedCustomer"><br>
+
+        <button type="submit">Save</button>
+    </form>
+</body>
+</html>

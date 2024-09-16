@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Customer List</title>
+</head>
+<body>
+    <h1>Customers</h1>
+    <h3><a href="client/addcustomer">Add New Customer</a></h3>
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Contact</th>
+            <th>Actions</th>
+        </tr>
+        <tr th:each="customer : ${customers}">
+            <td th:text="${customer.name}"></td>
+            <td th:text="${customer.contact}"></td>
+            <td>
+                <a th:href="@{/client/editcustomer/{name}(name=${customer.name})}">Edit</a>
+                <a th:href="@{/client/deletecustomer/{name}(name=${customer.name})}">Delete</a>
+            </td>
+        </tr>
+    </table>
+    <h1>Projects</h1>
+    <h3><a href="client/addproject">Add New Project</a></h3>
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Customer</th>
+            <th>Actions</th>
+        </tr>
+        <tr th:each="project : ${projects}">
+            <td th:text="${project.name}"></td>
+            <td th:text="${project.description}"></td>
+            <td th:text="${project.relatedCustomer.name}"></td>
+            <td>
+                <a th:href="@{/client/editproject/{name}(name=${project.name})}">Edit</a>
+                <a th:href="@{/client/deleteproject/{name}(name=${project.name})}">Delete</a>
+            </td>
+        </tr>
+    </table>
+    <h1 th:text="${'Download Projects Metadata'}"></h1>
+    <form th:action="@{/client/downloadprojectsforperiod}" method="post">
+        <label for="from">From:</label>
+        <input type="date" id="from" name="from"><br>
+
+        <label for="to">To:</label>
+        <input type="date" id="to" name="to"><br>
+
+        <button type="submit">Download Archive</button>
+    </form>
+</body>
+</html>
