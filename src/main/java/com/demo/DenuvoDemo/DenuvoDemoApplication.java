@@ -1,5 +1,6 @@
 package com.demo.DenuvoDemo;
 
+import com.demo.DenuvoDemo.customerprojects.entities.ErrorHandler;
 import com.demo.DenuvoDemo.services.CustomerService;
 import com.demo.DenuvoDemo.services.ProjectService;
 import org.springframework.boot.SpringApplication;
@@ -18,7 +19,11 @@ public class DenuvoDemoApplication {
     public ProjectService projectService() {
         return new ProjectService();
     }
-
+    
+    @Bean
+    public ErrorHandler errrHandler() {
+        return new ErrorHandler();
+    }
     public static void main(String[] args) {
             SpringApplication.run(DenuvoDemoApplication.class, args);
     }

@@ -11,6 +11,7 @@ import java.rmi.NoSuchObjectException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -88,13 +89,14 @@ public class ClientController {
     @RequestMapping(method = RequestMethod.GET,  value = "/addproject")
     public String addProjectForm(Model model) {
         model.addAttribute("project", new Project());
+        model.addAttribute("customers", customerService.findAllCustomers());
         return "project-adding-form";
     }
 
     @RequestMapping(method = RequestMethod.POST,  value = "/addproject")
     public String addProject(@ModelAttribute Project project) throws NoSuchObjectException {
         Customer customer = customerService.findCustomerByName(project.getRelatedCustomer().getName());
-        if (customer == null) throw new NoSuchObjectException("The corresponding customer doesn't exist");        
+        if (customer == null) throw new NoSuchObjectException("The corresponding customer doesn't exist");
         project.setCreationDate(LocalDateTime.now());
         project.setRelatedCustomer(customer);
         projectService.addProject(project);

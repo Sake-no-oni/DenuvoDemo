@@ -104,6 +104,9 @@ public class CustomerServiceTest {
         customerService.updateCustomerName(cust.getId(), custNewName);
         
         Assertions.assertEquals(cust.getId(), customerRepo.findByName(custNewName).getId());
+        for (Project project: projectService.getProjectsByCustomerId(cust.getId())) {
+            Assertions.assertEquals(custNewName, project.getRelatedCustomer().getName());
+        }
     }
     
     @Test
