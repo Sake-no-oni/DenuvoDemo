@@ -10,6 +10,8 @@ services:
       - "8888:8888"
     networks:
       - denuvo_demo_net
+    depends_on:
+      - db
   db:
     container_name: denuvo_demo_db_container
     image: postgres
